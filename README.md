@@ -1,8 +1,8 @@
 # Retrieval-Augmented Generation (RAG) Project
 
-**_Think it. Build it. bRAG it._ 🚀 bRAGAI's coming soon (🤫)**
+**_Think it. Build it. XyLo it._ 🚀 XyLo.Dev's powerful RAG solution**
 
-**[Join the waitlist](https://bragai.dev/)** for exclusive early access, be among the first to try your AI-powered full-stack development assistant, and transform ideas into production-ready web apps in minutes.
+**[Visit XyLo.Dev](https://xylo.dev/)** for exclusive access to your AI-powered full-stack development assistant, and transform ideas into production-ready web apps in minutes.
 
 ---------------------
 
@@ -117,8 +117,8 @@ Ensure **Python 3.11.11** (preferred) is installed on your system. Follow the pl
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/bRAGAI/bRAG-langchain.git
-cd bRAG-langchain
+git clone https://github.com/xylodev/xylo-langchain.git
+cd xylo-langchain
 ```
 
 #### 2. Create a Virtual Environment
@@ -180,8 +180,8 @@ Begin with `[1]_rag_setup_overview.ipynb` to get familiar with the setup process
 2. Add the following keys (replace with your actual values):
 
    ```env
-   # LLM Model - Get key at https://platform.openai.com/api-keys
-   OPENAI_API_KEY="your-api-key"
+   # LLM Model - Get key at https://console.groq.com/keys
+   GROQ_API_KEY="your-api-key"
 
    # LangSmith - Get key at https://smith.langchain.com
    LANGCHAIN_TRACING_V2=true
@@ -212,22 +212,25 @@ After setting up the environment and running the notebooks in sequence, you can:
 2.  **Implement Multi-Querying**:
     Learn how to improve response relevance by introducing multi-querying techniques in `[2]_rag_with_multi_query.ipynb`.
 
+3.  **Use Groq API for LLM Integration**:
+    Check out `groq_rag_example.ipynb` and `groq_example.py` to see how to integrate Groq API for faster and more efficient LLM responses.
+
 ## Star History
 
-<a href="https://star-history.com/#bragai/brag-langchain&Date">
+<a href="https://star-history.com/#xylodev/xylo-langchain&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=bragai/brag-langchain&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=bragai/brag-langchain&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=bragai/brag-langchain&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xylodev/xylo-langchain&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xylodev/xylo-langchain&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xylodev/xylo-langchain&type=Date" />
  </picture>
 </a>
 
 ## Contact
-Do you have questions or want to collaborate? Please open an issue or email Taha Ababou at taha@bragai.dev
+Do you have questions or want to collaborate? Please open an issue or email us at support@xylo.dev
 
-`If this project helps you, consider buying me a coffee ☕. Your support helps me keep contributing to the open-source community!`
+`If this project helps you, consider supporting our work ☕. Your support helps us keep contributing to the open-source community!`
 <p>
-    <a href="https://buymeacoffee.com/bragai" target="_blank" rel="noopener noreferrer">
+    <a href="https://xylo.dev/support" target="_blank" rel="noopener noreferrer">
         <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white" />
     </a>
 </p>
