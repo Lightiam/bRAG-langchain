@@ -1,82 +1,129 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import './ChatInterface.css';
 import Message from './Message';
-import axios from 'axios';
 
-const ChatInterface = () => {
-  const [messages, setMessages] = useState([
-    {
-      role: 'system',
-      content: 'Welcome to XyLo.Dev! How can I assist you today?'
-    }
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+class ChatInterface extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [
+        {
+          role: 'assistant',
+          content: 'Welcome to XyLo.Dev! How can I assist you today?'
+        }
+      ],
+      input: '',
+      isLoading: false,
+      error: null
+    };
+    this.messagesEndRef = React.createRef();
+  }
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  handleInputChange = (e) => {
+    this.setState({ input: e.target.value });
+  };
 
-  const handleSubmit = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!this.state.input.trim()) return;
 
-    const userMessage = { role: 'user', content: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post('/api/chat', {
-        message: input
-      });
-
-      const botMessage = { role: 'assistant', content: response.data.response };
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage = { 
-        role: 'assistant', 
-        content: 'Sorry, there was an error processing your request. Please try again.' 
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
+    const userMessage = { role: 'user', content: this.state.input };
+    const currentInput = this.state.input;
+    
+    this.setState(
+      prevState => ({
+        messages: [...prevState.messages, userMessage],
+        input: '',
+        isLoading: true,
+        error: null
+      }),
+      async () => {
+        try {
+          console.log('Sending message to API:', currentInput);
+          
+          // Call the Netlify function
+          const response = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: currentInput }),
+          });
+          
+          if (!response.ok) {
+            console.error('API error status:', response.status);
+            const errorText = await response.text();
+            console.error('API error response:', errorText);
+            throw new Error(`API error: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          console.log('API response:', data);
+          
+          const botMessage = { 
+            role: 'assistant', 
+            content: data.response,
+            sources: data.sources
+          };
+          
+          this.setState(prevState => ({
+            messages: [...prevState.messages, botMessage],
+            isLoading: false
+          }));
+        } catch (error) {
+          console.error('Error processing message:', error);
+          const errorMessage = { 
+            role: 'assistant', 
+            content: 'Sorry, there was an error processing your request. Please try again.' 
+          };
+          
+          this.setState(prevState => ({
+            messages: [...prevState.messages, errorMessage],
+            isLoading: false,
+            error: error.message
+          }));
+        }
+      }
+    );
   };
 
-  return (
-    <div className="chat-container">
-      <div className="messages-container">
-        {messages.map((message, index) => (
-          <Message key={index} message={message} />
-        ))}
-        {isLoading && (
-          <div className="loading-indicator">
-            <div className="loading-spinner"></div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
+  render() {
+    return (
+      <div className="chat-container">
+        <div className="messages-container">
+          {this.state.messages.map((message, index) => (
+            <Message key={index} message={message} />
+          ))}
+          {this.state.isLoading && (
+            <div className="loading-indicator">
+              <div className="loading-spinner"></div>
+            </div>
+          )}
+          <div ref={this.messagesEndRef} />
+        </div>
+        <form className="input-form" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.input}
+            onChange={this.handleInputChange}
+            placeholder="Ask me anything..."
+            disabled={this.state.isLoading}
+          />
+          <button type="submit" disabled={this.state.isLoading || !this.state.input.trim()}>
+            Send
+          </button>
+        </form>
       </div>
-      <form className="input-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message here..."
-          disabled={isLoading}
-        />
-        <button type="submit" disabled={isLoading || !input.trim()}>
-          Send
-        </button>
-      </form>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default ChatInterface;

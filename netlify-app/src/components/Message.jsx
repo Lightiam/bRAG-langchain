@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import './Message.css';
 
 const Message = ({ message }) => {
-  const { role, content } = message;
+  const { role, content, sources } = message;
   
   return (
     <div className={`message ${role}`}>
@@ -11,7 +10,26 @@ const Message = ({ message }) => {
         {role === 'user' ? '👤' : '🤖'}
       </div>
       <div className="message-content">
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <p>{content}</p>
+        
+        {sources && sources.length > 0 && (
+          <div className="message-sources">
+            <h4>Sources:</h4>
+            <ul>
+              {sources.map((source, index) => (
+                <li key={index}>
+                  <p>{source.content}</p>
+                  {source.metadata && (
+                    <span className="source-metadata">
+                      {source.metadata.source || 'Unknown source'}
+                      {source.metadata.score && ` (Relevance: ${Math.round(source.metadata.score * 100)}%)`}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
