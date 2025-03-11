@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© {new Date().getFullYear()} XyLo.Dev - Powered by Groq API</p>
+        <p>© {new Date().getFullYear()} XyLo.Dev</p>
         <div className="footer-links">
           <a href="https://xylo.dev/support" target="_blank" rel="noopener noreferrer">
             Support

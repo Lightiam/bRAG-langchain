@@ -28,7 +28,7 @@ export const handler = async (event) => {
       };
     }
 
-    // Call Groq API directly
+    // Call API
     const response = await axios.post(
       'https://api.groq.com/openai/v1/chat/completions',
       {
@@ -36,7 +36,7 @@ export const handler = async (event) => {
         messages: [
           {
             role: 'system',
-            content: 'You are XyLo.Dev, an AI assistant specializing in Retrieval-Augmented Generation (RAG). Provide helpful, accurate, and concise information about RAG and related topics.'
+            content: 'You are XyLo.Dev, an AI assistant. Provide helpful, accurate, and concise information.'
           },
           {
             role: 'user',

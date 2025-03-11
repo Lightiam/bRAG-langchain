@@ -7,7 +7,7 @@ const Header = () => {
       <div className="header-content">
         <div className="logo">
           <h1>XyLo.Dev</h1>
-          <span className="tagline">Retrieval-Augmented Generation</span>
+          <span className="tagline">AI Assistant</span>
         </div>
         <nav className="nav">
           <a href="https://xylo.dev" target="_blank" rel="noopener noreferrer">

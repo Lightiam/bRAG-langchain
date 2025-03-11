@@ -7,7 +7,7 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState([
     {
       role: 'system',
-      content: 'Welcome to XyLo.Dev RAG with Groq API integration. Ask me anything about Retrieval-Augmented Generation!'
+      content: 'Welcome to XyLo.Dev! How can I assist you today?'
     }
   ]);
   const [input, setInput] = useState('');
@@ -68,7 +68,7 @@ const ChatInterface = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask about RAG..."
+          placeholder="Type your message here..."
           disabled={isLoading}
         />
         <button type="submit" disabled={isLoading || !input.trim()}>
