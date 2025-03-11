@@ -1,0 +1,26 @@
+{
+  "appName": "xylo-app",
+  "description": "A fullstack web application generated with XyLo.Dev",
+  "frontend": {
+    "framework": "react",
+    "styling": "tailwind",
+    "language": "typescript",
+    "components": ["shadcn-ui"],
+    "features": ["authentication", "dark-theme", "responsive-design"]
+  },
+  "backend": {
+    "framework": "fastapi",
+    "database": "sqlite",
+    "features": ["authentication", "cors", "api-documentation"]
+  },
+  "deployment": {
+    "frontend": "netlify",
+    "backend": "fly.io"
+  },
+  "branding": {
+    "name": "XyLo.Dev",
+    "primaryColor": "#0ea5e9",
+    "backgroundColor": "#121212",
+    "textColor": "#e0e0e0"
+  }
+}
