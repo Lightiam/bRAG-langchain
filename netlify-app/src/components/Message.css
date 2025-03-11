@@ -16,15 +16,15 @@
 }
 
 .user .message-avatar {
-  background-color: #e2e8f0;
+  background-color: #333;
 }
 
 .assistant .message-avatar {
-  background-color: #dbeafe;
+  background-color: #0c4a6e;
 }
 
 .system .message-avatar {
-  background-color: #f8fafc;
+  background-color: #1f2937;
 }
 
 .message-content {
@@ -35,16 +35,16 @@
 }
 
 .user .message-content {
-  background-color: #f1f5f9;
+  background-color: #2d3748;
 }
 
 .assistant .message-content {
-  background-color: #f0f9ff;
+  background-color: #0f172a;
 }
 
 .system .message-content {
-  background-color: #f8fafc;
-  border: 1px dashed #cbd5e1;
+  background-color: #1f2937;
+  border: 1px dashed #4b5563;
 }
 
 .message-content p {
@@ -56,7 +56,7 @@
 }
 
 .message-content pre {
-  background-color: #1e293b;
+  background-color: #1a1a1a;
   color: #e2e8f0;
   padding: 1rem;
   border-radius: 4px;
@@ -65,4 +65,40 @@
 
 .message-content code {
   font-family: 'Courier New', Courier, monospace;
+}
+
+.message-sources {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #444;
+  font-size: 0.9rem;
+}
+
+.message-sources h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.message-sources ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: none;
+}
+
+.message-sources li {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  border-left: 3px solid #0ea5e9;
+}
+
+.source-metadata {
+  display: block;
+  font-size: 0.8rem;
+  color: #0ea5e9;
+  margin-top: 0.25rem;
+  font-weight: 500;
 }
