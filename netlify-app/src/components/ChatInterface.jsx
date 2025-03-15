@@ -1,6 +1,7 @@
 import React from 'react';
 import './ChatInterface.css';
 import Message from './Message';
+import { generateResponse } from '../utils/groqClient';
 
 class ChatInterface extends React.Component {
   constructor(props) {
@@ -47,26 +48,13 @@ class ChatInterface extends React.Component {
       }),
       async () => {
         try {
-          console.log('Sending message to API:', currentInput);
+          console.log('Processing message:', currentInput);
           
-          // Call the Netlify function
-          const response = await fetch('/.netlify/functions/chat', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: currentInput }),
-          });
-          
-          if (!response.ok) {
-            console.error('API error status:', response.status);
-            const errorText = await response.text();
-            console.error('API error response:', errorText);
-            throw new Error(`API error: ${response.status}`);
-          }
-          
-          const data = await response.json();
-          console.log('API response:', data);
+          // Use client-side processing for the demo
+          // In production, this would call a secure backend API endpoint
+          // that handles the API keys securely
+          const data = await generateResponse(currentInput);
+          console.log('Response generated:', data);
           
           const botMessage = { 
             role: 'assistant', 
